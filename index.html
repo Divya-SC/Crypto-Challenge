@@ -1,219 +1,923 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>CR7 Token Investigation Report</title>
+
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #0b0f17;
-    color: #e6edf3;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
+:root{
+  --bg:#0b0f17;
+  --card:#ffffff;
+  --soft:#f8fafc;
+  --text:#111827;
+  --muted:#64748b;
+  --line:#e5e7eb;
+  --blue:#2563eb;
+  --red:#dc2626;
+  --green:#059669;
+  --purple:#7c3aed;
+  --dark:#0f172a;
 }
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f8fafc;
+  color:var(--text);
+  line-height:1.6;
 }
-h1, h2 {
-    color: #58a6ff;
+header{
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  color:white;
+  padding:52px 24px;
 }
-.section {
-    margin-bottom: 40px;
+header .wrap, main{
+  max-width:1200px;
+  margin:auto;
 }
-img {
-    width: 100%;
-    border-radius: 8px;
-    margin-top: 10px;
+h1{font-size:44px;margin:0 0 10px}
+h2{font-size:28px;margin:0 0 14px}
+h3{margin-top:0}
+p{margin-top:0}
+code{
+  background:#eef2ff;
+  padding:4px 7px;
+  border-radius:6px;
+  word-break:break-all;
 }
-.box {
-    background: #161b22;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 10px;
+header code{
+  background:rgba(255,255,255,.15);
+  color:#dbeafe;
 }
-.warning {
-    color: #ff7b72;
-    font-weight: bold;
+main{padding:24px}
+section{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:26px;
+  margin:22px 0;
+  box-shadow:0 10px 28px rgba(15,23,42,.08);
+}
+.section-label{
+  display:inline-block;
+  background:#111827;
+  color:white;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:14px;
+}
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.mini{
+  background:var(--soft);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+}
+.evidence-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:18px;
+}
+.evidence-row.single{grid-template-columns:1fr}
+.evidence-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  background:#fff;
+}
+.evidence-card img{
+  width:100%;
+  display:block;
+}
+.evidence-body{
+  padding:13px 15px;
+}
+.evidence-title{
+  font-weight:bold;
+}
+.caption{
+  color:var(--muted);
+  font-size:13px;
+}
+.callout{
+  border-left:5px solid var(--blue);
+  background:#eff6ff;
+  padding:15px;
+  border-radius:12px;
+  margin-top:16px;
+}
+.callout.danger{
+  border-left-color:var(--red);
+  background:#fef2f2;
+}
+.callout.success{
+  border-left-color:var(--green);
+  background:#ecfdf5;
+}
+.callout.purple{
+  border-left-color:var(--purple);
+  background:#f5f3ff;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+}
+th,td{
+  border:1px solid var(--line);
+  padding:10px;
+  text-align:left;
+  vertical-align:top;
+}
+th{background:#f1f5f9}
+ul{margin-top:0}
+footer{
+  text-align:center;
+  padding:35px;
+  color:#64748b;
+}
+@media(max-width:850px){
+  .grid-2,.grid-3,.evidence-row{grid-template-columns:1fr}
+  h1{font-size:34px}
 }
 </style>
 </head>
 
 <body>
-<div class="container">
 
-<h1>CR7 Token Investigation Report</h1>
+<header>
+  <div class="wrap">
+    <h1>CR7 Token Investigation Report</h1>
+    <p>Solana bundle, wallet-cluster, metadata, infrastructure, promotion, and attribution case study.</p>
+    <p><strong>Token Mint:</strong> <code>XGbMLzy8r7iJN96huatiyv3VtJ3o1VYjpVzSz7Zpump</code></p>
+  </div>
+</header>
 
-<div class="section">
-<h2>1. Case Overview</h2>
-<div class="box">
-The CR7 token appears to be a coordinated meme coin launch leveraging the global popularity of Cristiano Ronaldo. 
-The investigation identifies structured promotion, coordinated wallet activity, and strong narrative-driven marketing 
-designed to attract retail investors.
-</div>
-</div>
+<main>
 
-<div class="section">
-<h2>2. Token Launch & Bundling Activity</h2>
-<div class="box">
-The token launch was executed using Jito bundling, indicating coordinated multi-wallet execution.
-</div>
-<img src="1st Jito-cr7-bundle.jpg">
-</div>
+<section id="overview">
+  <span class="section-label">Overview</span>
+  <h2>1. Case Overview</h2>
+  <p>
+    The CR7 token appears to be a coordinated meme coin launch leveraging the global popularity of Cristiano Ronaldo.
+    The investigation identified structured promotion, coordinated wallet activity, Jito bundle execution,
+    on-chain metadata linkage, cross-chain movement, and final routing toward centralized exchange infrastructure.
+  </p>
 
-<div class="section">
-<h2>3. Promotional Campaign Evidence</h2>
+  <table>
+    <tr><th>Token</th><td>CR7</td></tr>
+    <tr><th>Blockchain</th><td>Solana</td></tr>
+    <tr><th>Token / Mint</th><td><code>XGbMLzy8r7iJN96huatiyv3VtJ3o1VYjpVzSz7Zpump</code></td></tr>
+    <tr><th>Primary Creator / Operator Wallet</th><td><code>8qNzt6DxDtZYj8jhrm8NP7sNsMz1QzudymKxS5GPCX4Q</code></td></tr>
+    <tr><th>Launch Platform</th><td>Pump.fun</td></tr>
+    <tr><th>Bundle Platform</th><td>Jito</td></tr>
+    <tr><th>Website</th><td><code>cr7.life</code></td></tr>
+  </table>
 
-<div class="box">
-Multiple paid and coordinated promotions were observed across Twitter/X and influencer channels.
-</div>
+  <div class="callout">
+    <strong>Objective:</strong> Identify the wallet cluster, operational pattern, promotional infrastructure,
+    and likely actor type behind the CR7 token launch.
+  </div>
+</section>
 
-<img src="Paid promotion 1.png">
-<img src="Paid promotions 2.png">
-<img src="STLB Post.png">
+<section id="jito">
+  <span class="section-label">On-chain Coordination</span>
+  <h2>2. Token Launch & Bundling Activity</h2>
+  <p>
+    The token launch was executed using Jito bundling. This indicates coordinated transaction submission,
+    priority execution, and multi-wallet participation during the token launch period.
+  </p>
 
-<div class="box">
-The marketing narrative heavily focused on Ronaldo’s “last World Cup” hype to create urgency and FOMO.
-</div>
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Tools Used</h3>
+      <ul>
+        <li>Jito Explorer</li>
+        <li>Solscan / Solana Explorer</li>
+        <li>Pump.fun</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h3>Interpretation</h3>
+      <ul>
+        <li>Planned transaction ordering</li>
+        <li>Validator tip observed</li>
+        <li>Coordinated wallet participation</li>
+        <li>Structured launch execution</li>
+      </ul>
+    </div>
+  </div>
 
-</div>
+  <div class="evidence-row single">
+    <div class="evidence-card">
+      <img src="assets/screenshots/1st Jito-cr7-bundle.jpg" alt="CR7 Jito Bundle">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 1 — CR7 Jito Bundle Evidence</div>
+        <div class="caption">
+          Jito Explorer shows a landed CR7 bundle involving the creator/operator wallet, validator tip,
+          token reference, and multiple included transactions.
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="section">
-<h2>4. Social Media Manipulation</h2>
+  <div class="callout">
+    <strong>Finding:</strong> Jito usage supports coordinated technical execution, although it does not identify the real-world person behind the activity.
+  </div>
+</section>
 
-<div class="box">
-Frequent username changes and identity shifting indicate branding manipulation and potential obfuscation.
-</div>
+<section id="promotion">
+  <span class="section-label">Promotion Layer</span>
+  <h2>3. Promotional Campaign Evidence</h2>
+  <p>
+    Multiple paid and coordinated promotions were observed across X/Twitter, Telegram, and influencer-style channels.
+    The campaign narrative focused on Ronaldo’s “last World Cup” theme to create urgency, legitimacy, and retail FOMO.
+  </p>
 
-<img src="Username update details.png">
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Tools Used</h3>
+      <ul>
+        <li>X / Twitter OSINT</li>
+        <li>Telegram OSINT</li>
+        <li>Manual screenshot review</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h3>Observed Pattern</h3>
+      <ul>
+        <li>Direct contract sharing</li>
+        <li>Early-entry language</li>
+        <li>Paid promotion indicator</li>
+        <li>Football / Ronaldo narrative engineering</li>
+      </ul>
+    </div>
+  </div>
 
-<img src="CR7 Twitter Account.png">
-<img src="CR7 account post.png">
-<img src="CR7 Pump.fun profile.png">
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/STLB Post.png" alt="STLB Promotion">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 2 — STLB Foundation Launch Promotion</div>
+        <div class="caption">
+          Public post promoting the CR7 contract address with “Drop is live” messaging and narrative-driven wording.
+        </div>
+      </div>
+    </div>
 
-</div>
+    <div class="evidence-card">
+      <img src="assets/screenshots/Paid promotion 1.png" alt="Paid Promotion">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 3 — Paid Promotion Indicator</div>
+        <div class="caption">
+          X/Twitter post marked as paid partnership, supporting the existence of incentivized promotion.
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="section">
-<h2>5. Telegram & Influencer Activity</h2>
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/Paid promotions 2.png" alt="Narrative Promotion">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 4 — Narrative Promotion</div>
+        <div class="caption">
+          Promotional post frames CR7 as an early opportunity connected to Cristiano Ronaldo and the World Cup narrative.
+        </div>
+      </div>
+    </div>
 
-<div class="box">
-Telegram promotion shows direct call-to-action messaging encouraging users to buy the token.
-</div>
+    <div class="evidence-card">
+      <img src="assets/screenshots/CR7 account post.png" alt="CR7 Official Account Post">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 5 — CR7 Account Launch Post</div>
+        <div class="caption">
+          @CR7TheLastDance promoted the token contract and launch message directly.
+        </div>
+      </div>
+    </div>
+  </div>
 
-<img src="EV's telegram post.png">
-<img src="EV-telegram-profile.png">
-<img src="EV's Twitter Account.png">
+  <div class="callout">
+    <strong>Interpretation:</strong> The promotion was not purely organic. It shows structured amplification across multiple channels.
+  </div>
+</section>
 
-</div>
+<section id="social-identity">
+  <span class="section-label">Social Identity</span>
+  <h2>4. Social Media Manipulation & Identity Reuse</h2>
+  <p>
+    The CR7 social account shows naming history linked to prior token identities. This supports account reuse across multiple token campaigns.
+  </p>
 
-<div class="section">
-<h2>6. Website & Domain Evidence</h2>
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Tools Used</h3>
+      <ul>
+        <li>X / Twitter account history</li>
+        <li>Pump.fun profile review</li>
+        <li>Manual OSINT correlation</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h3>Observed Username Pattern</h3>
+      <ul>
+        <li>@RuglyAI</li>
+        <li>@RizzmasCTOCoin</li>
+        <li>@CR7TheLastDance</li>
+      </ul>
+    </div>
+  </div>
 
-<div class="box">
-The official website was recently created and uses privacy-protected WHOIS data.
-</div>
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/Username update details.png" alt="Username History">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 6 — Username History</div>
+        <div class="caption">
+          Shows X rename history linking @RuglyAI, @RizzmasCTOCoin, and @CR7TheLastDance naming phases.
+        </div>
+      </div>
+    </div>
 
-<img src="CR7 Website.png">
-<img src="WHOIS domain information.png">
-<img src="WHOIS DNS Evidence.png">
+    <div class="evidence-card">
+      <img src="assets/screenshots/CR7 Twitter Account.png" alt="CR7 Twitter Account">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 7 — CR7 X Account Information</div>
+        <div class="caption">
+          Shows @CR7TheLastDance account details, creation date, verification status, and username-change count.
+        </div>
+      </div>
+    </div>
+  </div>
 
-</div>
+  <div class="evidence-row single">
+    <div class="evidence-card">
+      <img src="assets/screenshots/CR7 Pump.fun profile.png" alt="CR7 Pump Fun Profile">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 8 — CR7 Pump.fun Profile Linkage</div>
+        <div class="caption">
+          Pump.fun / token profile displays the CR7 branding, X account, website, and token campaign description.
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="section">
-<h2>7. Metadata & Token Structure</h2>
+  <div class="callout danger">
+    <strong>Limitation:</strong> Username reuse supports campaign linkage but does not independently prove real-world identity.
+  </div>
+</section>
 
-<div class="box">
-On-chain metadata confirms the token identity and links to IPFS-hosted content.
-</div>
+<section id="telegram">
+  <span class="section-label">Telegram / Influencer Activity</span>
+  <h2>5. Telegram & Influencer Activity</h2>
+  <p>
+    Telegram evidence shows early contract sharing and call-to-action messaging. The identity cluster links Telegram promotion to the X identity @HardSnipe.
+  </p>
 
-<img src="IPFS Metadata JSON.png">
-<img src="On-chain Metadata Pointer.png">
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Tools Used</h3>
+      <ul>
+        <li>Telegram OSINT</li>
+        <li>X / Twitter profile review</li>
+        <li>Cross-platform identity matching</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h3>Observed Identity Cluster</h3>
+      <ul>
+        <li>Telegram channel: Ev’s Alphas</li>
+        <li>Telegram username: @IamRekt</li>
+        <li>X account: @HardSnipe</li>
+      </ul>
+    </div>
+  </div>
 
-</div>
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/EV's telegram post.png" alt="EV Telegram Post">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 9 — Telegram Contract Promotion</div>
+        <div class="caption">
+          Ev’s Alphas shared the CR7 contract address with “CR7 thank me later” style messaging.
+        </div>
+      </div>
+    </div>
 
-<div class="section">
-<h2>8. Fund Flow & Cross-Chain Activity</h2>
+    <div class="evidence-card">
+      <img src="assets/screenshots/EV-telegram-profile.png" alt="EV Telegram Profile">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 10 — Telegram Identity @IamRekt</div>
+        <div class="caption">
+          Telegram profile links @IamRekt to @HardSnipe / x.com/HardSnipe.
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="box">
-Funds were bridged and swapped across chains, indicating structured liquidity movement.
-</div>
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/EV's Twitter Account.png" alt="EV Twitter Account">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 11 — EV / @HardSnipe X Profile</div>
+        <div class="caption">
+          X profile shows the public promoter identity, Telegram link, and crypto promotional presence.
+        </div>
+      </div>
+    </div>
 
-<img src="Sol 8qNzt to ETH-USDC.jpg">
-<img src="USDC Inflows.png">
-<img src="etherscan-beaverbuild-state.png">
+    <div class="evidence-card">
+      <img src="assets/screenshots/Instagram-video.png" alt="Instagram Video">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 12 — Short-form Video Promotion</div>
+        <div class="caption">
+          Additional promotional media using the CR7 contract address and “only meme coin I am holding” framing.
+        </div>
+      </div>
+    </div>
+  </div>
 
-</div>
+  <div class="callout">
+    <strong>Interpretation:</strong> EV / HardSnipe appears strongly linked to the promotional layer.
+    This does not prove ownership of the creator wallet, but it supports promotion-side involvement.
+  </div>
+</section>
 
-<div class="section">
-<h2>9. Insider Network Analysis</h2>
+<section id="website-domain">
+  <span class="section-label">Website / Domain</span>
+  <h2>6. Website & Domain Evidence</h2>
+  <p>
+    The CR7 website was used as part of the token campaign. WHOIS and DNS evidence show privacy-protected registration and AWS-based infrastructure.
+  </p>
 
-<div class="box">
-Wallet clustering shows interconnected accounts indicating coordinated participation.
-</div>
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Tools Used</h3>
+      <ul>
+        <li>WHOIS / RDAP lookup</li>
+        <li>DNS lookup</li>
+        <li>Browser inspection</li>
+        <li>Website review</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h3>Infrastructure Indicators</h3>
+      <ul>
+        <li>Domain: cr7.life</li>
+        <li>Registrar: Gandi SAS</li>
+        <li>Registrant redacted for privacy</li>
+        <li>AWS nameservers / Amazon infrastructure</li>
+      </ul>
+    </div>
+  </div>
 
-<img src="Internal account connections.png">
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/CR7 Website.png" alt="CR7 Website">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 13 — CR7 Website</div>
+        <div class="caption">
+          Website displays CR7 branding, how-to-buy instructions, and the token contract address.
+        </div>
+      </div>
+    </div>
 
-</div>
+    <div class="evidence-card">
+      <img src="assets/screenshots/WHOIS DNS Evidence.png" alt="WHOIS DNS Evidence">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 14 — WHOIS / DNS Evidence</div>
+        <div class="caption">
+          Shows AWS nameservers, Amazon-hosted IP information, and registrar status.
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="section">
-<h2>10. Token Risk Indicators</h2>
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/WHOIS domain information.png" alt="WHOIS Domain Information">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 15 — WHOIS Domain Information</div>
+        <div class="caption">
+          Shows cr7.life creation date, Gandi registrar, privacy-protected registrant, and contact proxy email.
+        </div>
+      </div>
+    </div>
 
-<div class="box warning">
-High holder correlation and centralized ownership patterns indicate elevated risk.
-</div>
+    <div class="evidence-card">
+      <img src="assets/screenshots/Domain details.png" alt="Domain Details">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 16 — Domain Detail Record</div>
+        <div class="caption">
+          Shows redacted registrant information, country field, nameservers, and client transfer prohibited status.
+        </div>
+      </div>
+    </div>
+  </div>
 
-<img src="Rugcheck.png">
+  <div class="callout">
+    <strong>Interpretation:</strong> The domain setup supports rapid campaign deployment with limited public registrant visibility.
+  </div>
+</section>
 
-<div class="box">
-While some tools show no insider networks, clustering evidence suggests otherwise.
-</div>
+<section id="metadata">
+  <span class="section-label">Metadata Evidence</span>
+  <h2>7. Metadata & Token Structure</h2>
+  <p>
+    On-chain metadata confirms that the CR7 token directly embeds the X account and website reference.
+    This is one of the strongest creator-level campaign linkage points in the investigation.
+  </p>
 
-<img src="bubblemaps-warning.png">
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Tools Used</h3>
+      <ul>
+        <li>Solana token extension / metadata view</li>
+        <li>IPFS gateway</li>
+        <li>Manual JSON inspection</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h3>Metadata References</h3>
+      <ul>
+        <li><code>twitter: https://x.com/CR7TheLastDance</code></li>
+        <li><code>website: https://cr7.life</code></li>
+        <li><code>createdOn: https://pump.fun</code></li>
+      </ul>
+    </div>
+  </div>
 
-</div>
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/On-chain Metadata Pointer.png" alt="On-chain Metadata Pointer">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 17 — On-chain Metadata Pointer</div>
+        <div class="caption">
+          Shows the token metadata pointer, metadata address, token metadata extension, and IPFS URI.
+        </div>
+      </div>
+    </div>
 
-<div class="section">
-<h2>11. Comparative Tokens (Pattern Behavior)</h2>
+    <div class="evidence-card">
+      <img src="assets/screenshots/IPFS Metadata JSON.png" alt="IPFS Metadata JSON">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 18 — IPFS Metadata JSON</div>
+        <div class="caption">
+          IPFS JSON shows CR7 token name, image, description, Pump.fun creation reference, X account, and website.
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="box">
-Similar tokens show identical low-liquidity pump-style behavior.
-</div>
+  <div class="callout">
+    <strong>Interpretation:</strong> The metadata links @CR7TheLastDance and cr7.life to the token at the campaign level.
+  </div>
 
-<img src="RizzmasCTO.png">
-<img src="RuglyAI.png">
+  <div class="callout danger">
+    <strong>Limitation:</strong> Metadata proves campaign linkage, not real-world legal identity.
+  </div>
+</section>
 
-</div>
+<section id="fund-flow">
+  <span class="section-label">Fund Flow</span>
+  <h2>8. Fund Flow & Cross-chain Activity</h2>
+  <p>
+    Funds were swapped, bridged, and routed across chains. The flow indicates structured liquidity extraction and consolidation.
+  </p>
 
-<div class="section">
-<h2>12. Additional Promotion Content</h2>
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Tools Used</h3>
+      <ul>
+        <li>deBridge Explorer</li>
+        <li>Blockscan</li>
+        <li>Etherscan</li>
+        <li>Solscan</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h3>Observed Flow</h3>
+      <ul>
+        <li>Solana wallet activity</li>
+        <li>WSOL → USDC swaps</li>
+        <li>deBridge movement</li>
+        <li>Ethereum-side USDC inflows</li>
+      </ul>
+    </div>
+  </div>
 
-<img src="Instagram-video.png">
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/Sol 8qNzt to ETH-USDC.jpg" alt="Solana to Ethereum deBridge">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 19 — Solana to Ethereum deBridge Movement</div>
+        <div class="caption">
+          deBridge evidence showing movement involving the creator/operator wallet and Ethereum destination route.
+        </div>
+      </div>
+    </div>
 
-</div>
+    <div class="evidence-card">
+      <img src="assets/screenshots/USDC Inflows.png" alt="USDC Inflows">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 20 — Ethereum-side USDC Inflows</div>
+        <div class="caption">
+          Etherscan shows multiple USDC inflows from intermediary routing address to the Ethereum-side destination wallet.
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="section">
-<h2>13. Conclusion</h2>
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/Blockscan DFlow Swap.png" alt="DFlow Swap">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 21 — WSOL to USDC via DFlow Aggregator</div>
+        <div class="caption">
+          Blockscan shows WSOL converted into USDC via DFlow Aggregator with signer linked to the creator/operator wallet.
+        </div>
+      </div>
+    </div>
 
-<div class="box">
-The CR7 token demonstrates multiple high-risk indicators:
-<ul>
-<li>Coordinated launch using Jito bundling</li>
-<li>Strong influencer-driven promotion</li>
-<li>Rapid domain and branding setup</li>
-<li>Cross-chain fund movement</li>
-<li>Wallet clustering suggesting insider activity</li>
-<li>Narrative-driven hype leveraging a global celebrity</li>
-</ul>
+    <div class="evidence-card">
+      <img src="assets/screenshots/Blockscan OKX Swap.png" alt="OKX Swap">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 22 — WSOL to USDC via OKX Labs Routing</div>
+        <div class="caption">
+          Blockscan shows additional WSOL-to-USDC swap activity via OKX Labs routing.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-Overall, the token exhibits characteristics consistent with a speculative meme coin 
-with coordinated promotion and elevated risk for retail participants.
-</div>
+<section id="execution">
+  <span class="section-label">Execution Layer</span>
+  <h2>9. Ethereum Execution-layer Routing / Beaverbuild</h2>
+  <p>
+    Ethereum-side analysis shows that funds moved through an intermediary address associated with builder / execution-layer infrastructure.
+    This adds another abstraction layer between source and destination.
+  </p>
 
-</div>
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Tools Used</h3>
+      <ul>
+        <li>Etherscan token transfers</li>
+        <li>Etherscan state difference view</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h3>Observed Intermediary</h3>
+      <p><code>0x555CE236...2210cC35b</code></p>
+      <p>Observed as source of repeated USDC inflows.</p>
+    </div>
+  </div>
 
-</div>
+  <div class="evidence-row single">
+    <div class="evidence-card">
+      <img src="assets/screenshots/etherscan-beaverbuild-state.png" alt="Beaverbuild State">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 23 — Beaverbuild / State Difference Evidence</div>
+        <div class="caption">
+          Etherscan state view shows builder / producer reference, supporting execution-layer routing analysis.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout purple">
+    <strong>Interpretation:</strong> This supports structured routing and advanced transaction handling, but does not identify the real-world actor.
+  </div>
+</section>
+
+<section id="insider-network">
+  <span class="section-label">Insider Network</span>
+  <h2>10. Insider Network Analysis</h2>
+  <p>
+    Wallet clustering and risk analysis show interconnected accounts, high holder correlation, and centralized ownership indicators.
+  </p>
+
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Tools Used</h3>
+      <ul>
+        <li>Bubblemaps</li>
+        <li>RugCheck</li>
+        <li>Pump.fun</li>
+        <li>Manual wallet clustering</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h3>Key Risk Indicators</h3>
+      <ul>
+        <li>High holder correlation</li>
+        <li>Centralized creator balance</li>
+        <li>Connected account structure</li>
+        <li>Launch-period insider activity</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/Internal account connections.png" alt="Internal Account Connections">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 24 — Internal Account Connections</div>
+        <div class="caption">
+          Shows transfer network structure, total accounts, total connections, and network overview.
+        </div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <img src="assets/screenshots/Rugcheck.png" alt="RugCheck">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 25 — RugCheck Risk Indicators</div>
+        <div class="caption">
+          Shows risk warning, high holder correlation, creator balance, LP lock status, and top holder concentration.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="evidence-row single">
+    <div class="evidence-card">
+      <img src="assets/screenshots/bubblemaps-warning.png" alt="Bubblemaps Warning">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 26 — BubbleMaps Public Warning</div>
+        <div class="caption">
+          Third-party warning describes fake CR7 token promotion, deleted tweets, and repeated promotion attempts.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="comparative">
+  <span class="section-label">Pattern Evidence</span>
+  <h2>11. Comparative Tokens — RuglyAI & RizzmasCTO</h2>
+  <p>
+    RuglyAI and RizzmasCTO are treated as supporting pattern evidence. They show similar campaign-style token launches,
+    low-liquidity behavior, and naming alignment with the CR7 account history.
+  </p>
+
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Tools Used</h3>
+      <ul>
+        <li>Pump.fun</li>
+        <li>Token page review</li>
+        <li>Username history comparison</li>
+      </ul>
+    </div>
+    <div class="mini">
+      <h3>Purpose</h3>
+      <p>These tokens support repeated operational behavior, but the primary case remains CR7.</p>
+    </div>
+  </div>
+
+  <div class="evidence-row">
+    <div class="evidence-card">
+      <img src="assets/screenshots/RizzmasCTO.png" alt="Rizzmas CTO">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 27 — RizzmasCTO Token Page</div>
+        <div class="caption">
+          Supporting token page showing prior campaign-style token launch behavior.
+        </div>
+      </div>
+    </div>
+
+    <div class="evidence-card">
+      <img src="assets/screenshots/RuglyAI.png" alt="RuglyAI">
+      <div class="evidence-body">
+        <div class="evidence-title">Figure 28 — RuglyAI Token Page</div>
+        <div class="caption">
+          Supporting token page showing earlier token phase linked to account naming history.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="final-destination">
+  <span class="section-label">Final Destination</span>
+  <h2>12. Final Destination & Coinbase Exit Indicators</h2>
+  <p>
+    Post-launch fund movement indicates conversion and routing toward centralized exchange infrastructure.
+    The following wallets were identified as Coinbase-related hot wallet / USDC exit endpoints during the investigation.
+  </p>
+
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Primary Exit Wallet</h3>
+      <p><code>4NyK1AdJBNbgaJ9EsKz3J4rfeHsuYdjkTPg3JaNdLeFw</code></p>
+    </div>
+
+    <div class="mini">
+      <h3>Additional Coinbase Hot Wallet Indicators</h3>
+      <ul>
+        <li><code>D89hHJT5Aqyx1trP6EnGY9jJUB3whgnq3aUvvCqedvzf</code></li>
+        <li><code>FpwQQhQQoEaVu3WU2qZMfF1hx48YyfwsLoRgXG83E99Q</code></li>
+        <li><code>GJRs4FwHtemZ5ZE9x3FNvJ8TMwitKTh21yxdRPqn7npE</code></li>
+        <li><code>9obNtb5GyUegcs3a1CbBkLuc5hEWynWfJC6gjz5uWQkE</code></li>
+        <li><code>H8sMJSCQxfKiFTCfDR3DUMLPwcRbM61LGFJ8N4dK3WjS</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mini" style="margin-top:18px;">
+    <h3>Additional Coinbase-related Wallet / Transaction Indicator</h3>
+    <p><code>2AQdpHJ2JpcEgPiATUXjQxA8QmafFegfQwSLWSprPicm</code></p>
+    <p><code>5jioNNfUiJDCT4sXU8emFWDXSq4mGP7gKeqrhYkdEJuXqMcmiLu18BQmNf4fjueNtmtoC9kzBMW2UY91K8XTDMKY</code></p>
+  </div>
+
+  <div class="callout">
+    <strong>Interpretation:</strong> Funds appear to have been extracted, converted into USDC, consolidated, and routed toward Coinbase-related exchange infrastructure.
+  </div>
+
+  <div class="callout danger">
+    <strong>Limitation:</strong> Coinbase may hold KYC information for deposit endpoints, but that information is not publicly available.
+  </div>
+</section>
+
+<section id="attribution">
+  <span class="section-label">Final Assessment</span>
+  <h2>13. Attribution Conclusion — Who Is Behind This?</h2>
+
+  <p>
+    A confirmed real-world identity was not established from public evidence. However, the investigation supports attribution
+    to a coordinated wallet cluster and campaign infrastructure centered around the creator/operator wallet:
+  </p>
+
+  <p><code>8qNzt6DxDtZYj8jhrm8NP7sNsMz1QzudymKxS5GPCX4Q</code></p>
+
+  <div class="grid-2">
+    <div class="mini">
+      <h3>Operational Layer</h3>
+      <ul>
+        <li>Creator wallet</li>
+        <li>Jito bundle execution</li>
+        <li>Temporary / connected wallet behavior</li>
+        <li>WSOL → USDC swaps</li>
+        <li>deBridge / Ethereum-side routing</li>
+        <li>Coinbase-related exit endpoints</li>
+      </ul>
+    </div>
+
+    <div class="mini">
+      <h3>Campaign Layer</h3>
+      <ul>
+        <li>@CR7TheLastDance embedded in metadata</li>
+        <li>cr7.life embedded in metadata</li>
+        <li>Telegram promotion through Ev’s Alphas</li>
+        <li>EV / @HardSnipe promotion linkage</li>
+        <li>Paid and influencer-style promotion</li>
+        <li>RuglyAI / RizzmasCTO / CR7 naming pattern</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout success">
+    <strong>Final Position:</strong>
+    The CR7 token activity cannot be classified as organic market behavior. It reflects a coordinated token deployment model
+    involving controlled wallets, bundled execution, cross-chain routing, metadata-linked campaign identity, influencer-style promotion,
+    and structured exit toward centralized exchange infrastructure.
+  </div>
+
+  <div class="callout">
+    <strong>Most Likely Actor Type:</strong>
+    A coordinated crypto trading / pump group experienced with Pump.fun launches, wallet distribution,
+    social media amplification, and exchange off-ramping.
+  </div>
+
+  <div class="callout danger">
+    <strong>Attribution Limitation:</strong>
+    EV / @HardSnipe and related channels are strongly linked to the promotional layer, but public evidence does not conclusively prove
+    they owned the creator wallet. The strongest public attribution is therefore wallet-cluster and campaign-infrastructure based,
+    not legal identity based.
+  </div>
+</section>
+
+</main>
+
+<footer>
+  CR7 Token Investigation Report — By Divya Balakrishnan
+</footer>
+
 </body>
 </html>
